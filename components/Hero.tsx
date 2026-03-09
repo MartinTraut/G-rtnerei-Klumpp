@@ -1,114 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Phone, ArrowDown, Sparkles } from "lucide-react";
+import { Phone, ArrowDown } from "lucide-react";
 import { useRef } from "react";
 import Image from "next/image";
-
-function HeroFlowerDecoration() {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Large rose top-right */}
-      <motion.svg
-        className="absolute -top-10 -right-10 w-64 h-64 lg:w-96 lg:h-96"
-        viewBox="0 0 200 200"
-        fill="none"
-        animate={{ rotate: [0, 5, -3, 0], scale: [1, 1.02, 0.98, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      >
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-          <ellipse
-            key={angle}
-            cx="100"
-            cy="60"
-            rx="28"
-            ry="45"
-            fill="#E8A0BF"
-            opacity="0.15"
-            transform={`rotate(${angle} 100 100)`}
-          />
-        ))}
-        <circle cx="100" cy="100" r="20" fill="#E8A0BF" opacity="0.2" />
-      </motion.svg>
-
-      {/* Vine bottom-left */}
-      <motion.svg
-        className="absolute -bottom-5 -left-5 w-80 h-80 lg:w-[500px] lg:h-[500px]"
-        viewBox="0 0 300 300"
-        fill="none"
-        animate={{ y: [0, -8, 0], x: [0, 3, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <path
-          d="M0 300 Q50 250 80 200 Q110 150 100 100 Q90 50 120 20"
-          stroke="#7FB069"
-          strokeWidth="3"
-          opacity="0.2"
-          fill="none"
-        />
-        <path
-          d="M20 300 Q70 260 100 220 Q130 180 125 130 Q120 80 140 50"
-          stroke="#7FB069"
-          strokeWidth="2"
-          opacity="0.15"
-          fill="none"
-        />
-        {[[80, 200], [100, 140], [120, 80], [60, 250]].map(([cx, cy], i) => (
-          <motion.circle
-            key={i}
-            cx={cx}
-            cy={cy}
-            r="12"
-            fill="#7FB069"
-            opacity="0.15"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-            transition={{ duration: 4, delay: i * 0.8, repeat: Infinity }}
-          />
-        ))}
-      </motion.svg>
-
-      {/* Small flowers scattered */}
-      {[
-        { x: "20%", y: "20%", color: "#F5D5E0", size: 30, delay: 0 },
-        { x: "70%", y: "75%", color: "#FFDAB9", size: 25, delay: 1.5 },
-        { x: "85%", y: "40%", color: "#C3B1E1", size: 20, delay: 3 },
-        { x: "35%", y: "80%", color: "#E8A0BF", size: 22, delay: 2 },
-      ].map((f, i) => (
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{ left: f.x, top: f.y }}
-          animate={{
-            y: [0, -10, 0],
-            rotate: [0, 15, -10, 0],
-            opacity: [0.4, 0.7, 0.4],
-          }}
-          transition={{
-            duration: 6 + i * 2,
-            delay: f.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <svg width={f.size} height={f.size} viewBox="0 0 40 40" fill="none">
-            {[0, 60, 120, 180, 240, 300].map((angle) => (
-              <ellipse
-                key={angle}
-                cx="20"
-                cy="10"
-                rx="5"
-                ry="10"
-                fill={f.color}
-                transform={`rotate(${angle} 20 20)`}
-              />
-            ))}
-            <circle cx="20" cy="20" r="4" fill="#F2C94C" opacity="0.6" />
-          </svg>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
+import Link from "next/link";
 
 export default function Hero() {
   const ref = useRef(null);
@@ -123,7 +19,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[92vh] lg:min-h-screen flex items-center overflow-hidden"
+      className="relative h-svh flex flex-col justify-center overflow-hidden"
     >
       {/* Background Image with Parallax */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
@@ -135,110 +31,91 @@ export default function Hero() {
           priority
           sizes="100vw"
         />
-        {/* TODO: Original-Bild von blumen-flein.de */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a]/70 via-[#1a1a1a]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF9] via-transparent to-transparent opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/90 via-[#1a1a1a]/60 to-[#1a1a1a]/30 sm:from-[#1a1a1a]/85 sm:via-[#1a1a1a]/50 sm:to-[#1a1a1a]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/80 via-[#1a1a1a]/20 to-transparent sm:from-[#1a1a1a]/50 sm:via-transparent" />
       </motion.div>
 
-      {/* Flower Decorations */}
-      <HeroFlowerDecoration />
-
       <motion.div
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full"
+        className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10"
         style={{ y: textY, opacity }}
       >
-        <div className="max-w-2xl">
+        <div className="max-w-3xl text-center sm:text-left mx-auto sm:mx-0">
+          {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1 }}
-            className="flex items-center gap-2 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-4 py-1.5 sm:px-5 sm:py-2 mb-5 sm:mb-8"
           >
-            <motion.div
-              animate={{ rotate: [0, 15, -15, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Sparkles className="w-4 h-4 text-accent" />
-            </motion.div>
-            <span className="text-white/80 text-sm tracking-[0.25em] uppercase font-medium">
-              Seit 1968 in Flein
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-white/90 text-xs sm:text-sm tracking-wide font-medium">
+              Familienbetrieb seit 1968
             </span>
           </motion.div>
 
+          {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white leading-[1.05] mb-6 lg:mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.12 }}
+            className="font-serif text-5xl leading-[1.05] sm:text-[3.5rem] md:text-7xl lg:text-8xl xl:text-[6.5rem] text-white mb-4 sm:mb-7 lg:mb-9 tracking-tight"
           >
-            <span className="block">Blumen</span>
-            <motion.span
-              className="block text-transparent bg-clip-text bg-gradient-to-r from-[#E8A0BF] via-[#FFDAB9] to-[#E8A0BF]"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              style={{ backgroundSize: "200% 200%" }}
-            >
-              mit Seele
-            </motion.span>
+            Blumen
+            <br />
+            <span className="italic text-accent">mit Seele</span>
           </motion.h1>
 
+          {/* Subline */}
           <motion.p
-            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-white/80 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 lg:mb-12 max-w-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.28 }}
+            className="text-white/70 text-base sm:text-lg lg:text-xl leading-relaxed mb-7 sm:mb-10 lg:mb-12 max-w-sm sm:max-w-xl mx-auto sm:mx-0"
           >
-            Ihr Blumengeschäft und Ihre Gärtnerei in Flein.
-            Schnittblumen, Sträuße, Hochzeitsfloristik, Trauerfloristik
+            Ihr Blumengeschäft und Ihre Gärtnerei in Flein –
+            Schnittblumen, Floristik für jeden Anlass
             und professionelle Grabpflege im Raum Heilbronn.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4"
+            transition={{ duration: 0.8, delay: 0.42 }}
+            className="flex flex-row justify-center sm:justify-start gap-3 sm:gap-4"
           >
-            <motion.a
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.97 }}
+            <a
               href="tel:+497131252449"
-              className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#3B6B4A] to-[#4A7D5A] text-white px-8 py-4 rounded-full text-base font-medium shadow-2xl shadow-green-900/30 hover:shadow-green-900/50 transition-shadow"
+              className="inline-flex items-center justify-center gap-2 sm:gap-2.5 bg-gradient-to-r from-[#3B6B4A] to-[#4A7D5A] text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium shadow-2xl shadow-green-900/30 hover:shadow-green-900/50 hover:scale-[1.03] active:scale-[0.98] transition-all"
             >
-              <Phone className="w-5 h-5" />
-              Jetzt anrufen
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              href="#kontakt"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:bg-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all"
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span>Anrufen</span>
+            </a>
+            <Link
+              href="/leistungen"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:bg-white/20 text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium transition-all hover:scale-[1.03] active:scale-[0.98]"
             >
-              Anfrage senden
-            </motion.a>
+              <span>Leistungen</span>
+            </Link>
           </motion.div>
         </div>
       </motion.div>
 
       {/* Scroll Indicator */}
-      <motion.a
-        href="#leistungen"
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-white/50 hover:text-white/80 transition-colors"
-        aria-label="Scrollen"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-white/40"
       >
-        <span className="text-xs tracking-[0.2em] uppercase">Entdecken</span>
+        <span className="text-[10px] sm:text-xs tracking-[0.2em] uppercase">Entdecken</span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
         >
-          <ArrowDown className="w-5 h-5" />
+          <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
         </motion.div>
-      </motion.a>
+      </motion.div>
     </section>
   );
 }

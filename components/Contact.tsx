@@ -19,53 +19,8 @@ export default function Contact() {
   const todayIndex = dayIndexMap[today];
 
   return (
-    <section id="kontakt" className="py-24 lg:py-36 bg-white relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-[0.04]"
-          style={{ background: "radial-gradient(circle, #3B6B4A, transparent 60%)" }}
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-        <motion.svg
-          className="absolute bottom-20 left-10 w-20 h-20 opacity-[0.05]"
-          viewBox="0 0 80 80"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        >
-          {[0, 60, 120, 180, 240, 300].map((a) => (
-            <ellipse key={a} cx="40" cy="15" rx="8" ry="18" fill="#D4937A" transform={`rotate(${a} 40 40)`} />
-          ))}
-          <circle cx="40" cy="40" r="6" fill="#F2C94C" />
-        </motion.svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 text-accent text-sm tracking-[0.2em] uppercase font-medium bg-accent/10 px-4 py-1.5 rounded-full"
-          >
-            <MapPin className="w-3.5 h-3.5" />
-            Kontakt
-          </motion.span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-foreground mt-5 mb-5">
-            Besuchen Sie <span className="italic text-primary">uns</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Wir freuen uns auf Ihren Besuch oder Ihre Nachricht.
-          </p>
-        </motion.div>
-
+    <section className="pb-24 lg:pb-36 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Contact Info */}
           <motion.div
@@ -111,16 +66,12 @@ export default function Contact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
                 className="bg-background rounded-2xl p-5 border border-border/40 hover:border-primary/20 hover:shadow-lg hover:shadow-black/5 transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <motion.div
-                    className="flex-shrink-0 w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center"
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                  >
+                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center">
                     <item.icon className="w-5 h-5 text-primary" />
-                  </motion.div>
+                  </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1 text-sm">{item.title}</h3>
                     {item.content}
@@ -129,17 +80,15 @@ export default function Contact() {
               </motion.div>
             ))}
 
-            <motion.a
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.97 }}
+            <a
               href="https://www.google.com/maps/dir/?api=1&destination=Buchernstra%C3%9Fe+21,+74223+Flein"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#3B6B4A] to-[#4A7D5A] text-white py-3.5 rounded-2xl font-medium shadow-lg shadow-green-900/20 w-full"
+              className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#3B6B4A] to-[#4A7D5A] text-white py-3.5 rounded-2xl font-medium shadow-lg shadow-green-900/20 w-full hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <Navigation className="w-4 h-4" />
               Route planen
-            </motion.a>
+            </a>
           </motion.div>
 
           {/* Opening Hours */}
@@ -148,28 +97,20 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-background rounded-3xl p-6 lg:p-8 border border-border/40 hover:shadow-lg hover:shadow-black/5 transition-all"
+            className="bg-background rounded-3xl p-6 lg:p-8 border border-border/40"
           >
             <div className="flex items-center gap-3 mb-6">
-              <motion.div
-                className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center"
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 6, repeat: Infinity }}
-              >
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center">
                 <Clock className="w-5 h-5 text-primary" />
-              </motion.div>
+              </div>
               <h3 className="font-serif text-xl font-semibold text-foreground">
                 Öffnungszeiten
               </h3>
             </div>
             <div className="space-y-2">
               {hours.map((item, index) => (
-                <motion.div
+                <div
                   key={item.day}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + index * 0.05 }}
                   className={`flex items-center justify-between py-2.5 px-3 rounded-xl text-sm transition-colors ${
                     index === todayIndex
                       ? "bg-primary/5 border border-primary/15"
@@ -179,19 +120,15 @@ export default function Contact() {
                   <span className={index === todayIndex ? "text-primary font-semibold" : "text-foreground"}>
                     {item.day}
                     {index === todayIndex && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="ml-2 text-[10px] uppercase tracking-wider bg-primary text-white px-1.5 py-0.5 rounded-md inline-block"
-                      >
+                      <span className="ml-2 text-[10px] uppercase tracking-wider bg-primary text-white px-1.5 py-0.5 rounded-md inline-block">
                         Heute
-                      </motion.span>
+                      </span>
                     )}
                   </span>
                   <span className={item.time === "Geschlossen" ? "text-muted-foreground" : index === todayIndex ? "text-primary font-medium" : "text-muted-foreground"}>
                     {item.time}
                   </span>
-                </motion.div>
+                </div>
               ))}
             </div>
             <p className="text-xs text-muted-foreground mt-4 text-center">

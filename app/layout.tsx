@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import StickyCTA from "@/components/StickyCTA";
 
 const heading = Playfair_Display({
   variable: "--font-heading",
@@ -187,7 +190,12 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
-        {children}
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
+        <StickyCTA />
       </body>
     </html>
   );
